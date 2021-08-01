@@ -79,7 +79,7 @@ class LinkedList
     end
 
     def remove(index)
-        return p 'incorrect index' if index < 0 || index >= @length
+        return 'incorrect index' if index < 0 || index >= @length
         return remove_first if index === 0
         return remove_last(index) if index == @length-1
         node = traverse_index(index)
@@ -99,6 +99,35 @@ class LinkedList
         new_tail[:next] = nil
         @length -=1
     end
+
+    # def reverse
+    #     current_node = @head
+    #     @tail = @head
+    #     next_node = current_node[:next]
+
+    #     while next_node
+    #         temp = next_node[:next]
+    #         next_node[:next] = current_node
+    #         current_node = next_node
+    #         next_node = temp
+    #     end
+    #     @head[:next] = nil
+    #     @head = current_node
+    # end
+
+    def reverse
+        prev = nil
+        current = @head
+        next_node = current[:next]
+
+        while current
+            next_node = current[:next]
+            current[:next] = prev
+            prev = current
+            current = next_node
+        end
+        @head = prev
+    end
 end
 
 list = LinkedList.new(10)
@@ -106,7 +135,7 @@ list.append(5)
 list.append(16)
 list.prepend(1)
 list.insert(2, 44)
-# p list.print_all
-list.remove(9)
 p list.print_all
-# p list
+# list.remove(9)
+p list.reverse
+p list.print_all
