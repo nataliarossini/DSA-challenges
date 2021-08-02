@@ -62,10 +62,27 @@ class BinarySearchTree
         if !to_remove.left && !to_remove.right 
             @root = nil
         end
-        # current_node = @root
-        # parent_node
-        # child_node
-        # child_node2
+        current_node = @root
+        child_node = nil
+        child_node2 = nil
+        parent_node = nil
+        while current_node
+            if value < current_node.value
+                parent_node = current_node
+                current_node = current_node.left
+            elsif value > current_node.value
+                parent_node = current_node
+                current_node = current_node.right
+            elsif current_node.value == value
+                child_node = current_node.left if current_node.left 
+                child_node2 = current_node.right if current_node.right 
+                if child_node < child_node2
+                    current_node = child_node
+                    
+                parent_node.left = child_node
+                parent_node.right = child_node2
+            end
+        end
     end
 end
 
